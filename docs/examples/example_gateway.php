@@ -20,7 +20,7 @@ require_once 'config.php';
 require_once $phpcas_path . '/CAS.php';
 
 // Enable debugging
-phpCAS::setDebug();
+phpCAS::setDebug($phpcas_path . "phpCAS.log");
 // Enable verbose error messages. Disable in production!
 phpCAS::setVerbose(true);
 
@@ -42,6 +42,8 @@ if (isset($_REQUEST['logout'])) {
 if (isset($_REQUEST['login'])) {
     phpCAS::forceAuthentication();
 }
+
+phpCAS::handleLogoutRequests(true, $cas_real_hosts);
 
 // check CAS authentication
 $auth = phpCAS::checkAuthentication();

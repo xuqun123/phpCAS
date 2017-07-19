@@ -41,7 +41,7 @@ $cas_server_ca_cert_path = '/path/to/cachain.pem';
 
 // The "real" hosts of clustered cas server that send SAML logout messages
 // Assumes the cas server is load balanced across multiple hosts
-// $cas_real_hosts = array('cas-real-1.example.com', 'cas-real-2.example.com');
+$cas_real_hosts = array('localhost', 'kayla.pixelforcesystems.com.au', 'join.sweat.com');
 
 // Client config for cookie hardening
 $client_domain = '127.0.0.1';
@@ -51,10 +51,10 @@ $client_httpOnly = true;
 $client_lifetime = 0;
 
 // Database config for PGT Storage
-$db = 'pgsql:host=localhost;dbname=phpcas';
+$db = 'pgsql:host=localhost;dbname=php_cas';
 //$db = 'mysql:host=localhost;dbname=phpcas';
-$db_user = 'phpcasuser';
-$db_password = 'mysupersecretpass';
+$db_user = 'postgres';
+$db_password = '';
 $db_table = 'phpcastabel';
 $driver_options = '';
 
