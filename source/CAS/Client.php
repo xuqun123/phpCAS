@@ -314,7 +314,7 @@ class CAS_Client
     {
         // the URL is build only when needed
         if ( empty($this->_server['base_url']) ) {
-            $this->_server['base_url'] = 'https://' . $this->_getServerHostname();
+            $this->_server['base_url'] = 'http://' . $this->_getServerHostname();
             if ($this->_getServerPort()!=443) {
                 $this->_server['base_url'] .= ':'
                 .$this->_getServerPort();
@@ -339,7 +339,11 @@ class CAS_Client
         phpCAS::traceBegin();
         // the URL is build only when needed
         if ( empty($this->_server['login_url']) ) {
-            $this->_server['login_url'] = $this->_buildQueryUrl($this->_getServerBaseURL().'login','service='.urlencode($this->getURL()));
+            $pattern = '/\?login=/';
+            $replacement = '';
+            $service = preg_replace($pattern, $replacement, $this->getURL());
+
+            $this->_server['login_url'] = $this->_buildQueryUrl($this->_getServerBaseURL().'login','service='.urlencode($service));
         }
         $url = $this->_server['login_url'];
         if ($renew) {
@@ -1691,7 +1695,13 @@ class CAS_Client
         if (isset($params['service'])) {
             $cas_url = $cas_url . $paramSeparator . "service="
                 . urlencode($params['service']);
+        } else {
+            $pattern = '/\?logout=/';
+            $replacement = '';
+            $service = preg_replace($pattern, $replacement, $this->getURL());
+            $cas_url = $cas_url . $paramSeparator . 'service=' . urlencode($service);
         }
+
         header('Location: '.$cas_url);
         phpCAS::trace("Prepare redirect to : ".$cas_url);
 
