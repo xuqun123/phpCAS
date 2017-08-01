@@ -314,7 +314,7 @@ class CAS_Client
     {
         // the URL is build only when needed
         if ( empty($this->_server['base_url']) ) {
-            $this->_server['base_url'] = 'http://' . $this->_getServerHostname();
+            $this->_server['base_url'] = 'https://' . $this->_getServerHostname();
             if ($this->_getServerPort()!=443) {
                 $this->_server['base_url'] .= ':'
                 .$this->_getServerPort();
@@ -3592,7 +3592,12 @@ class CAS_Client
             $hosts = explode(',', $_SERVER['HTTP_X_FORWARDED_HOST']);
             // see rfc7239#5.3 and rfc7230#2.7.1: port is in HTTP_X_FORWARDED_HOST if non default
             return $hosts[0];
-        } else if (!empty($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
+        } else if (!empty($_SERVER['HTTP_HOST'])) {
+            $server_url = $_SERVER['HTTP_HOST'];
+            $server_url = "https://" . $server_url;
+            return $server_url;
+        } 
+        else if (!empty($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
             $server_url = $_SERVER['HTTP_X_FORWARDED_SERVER'];
         } else {
             if (empty($_SERVER['SERVER_NAME'])) {

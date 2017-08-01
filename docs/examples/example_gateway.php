@@ -67,7 +67,13 @@ if ($auth) {
     <h1>Guest mode</h1>
     <p><a href="?login=">Login</a></p><?php
 }
-                                      ?>
+  // echo $_SERVER['HTTP_X_FORWARDED_HOST'];
+  // echo $_SERVER['HTTP_X_FORWARDED_SERVER'];
+  // echo $_SERVER['SERVER_NAME'];
+  echo $_SERVER['HTTP_HOST'];
+  echo $_SERVER['HTTP_PORT'];
+  // print_r($_SERVER);
+                                        ?> 
     <p>phpCAS version is <b><?php echo phpCAS::getVersion(); ?></b>.</p>
   </body>
 </html>

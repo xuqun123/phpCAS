@@ -24,13 +24,13 @@ $phpcas_path = '../../source/';
 ///////////////////////////////////////
 
 // Full Hostname of your CAS Server
-$cas_host = 'localhost';
+$cas_host = 'kayla.pixelforcesystems.com.au';
 
 // Context of the CAS Server
-$cas_context = '/sso';
+$cas_context = 'en/sso';
 
 // Port of your CAS server. Normally for a https server it's 443
-$cas_port = 3000;
+$cas_port = 443;
 
 // Path to the ca chain that issued the cas server certificate
 $cas_server_ca_cert_path = '/path/to/cachain.pem';
@@ -75,8 +75,8 @@ if ($_SERVER['SERVER_PORT'] != 80 && $_SERVER['SERVER_PORT'] != 443) {
 $curdir = dirname($_SERVER['REQUEST_URI']) . "/";
 
 // CAS client nodes for rebroadcasting pgtIou/pgtId and logoutRequest
-$rebroadcast_node_1 = 'http://cas-client-1.example.com';
-$rebroadcast_node_2 = 'http://cas-client-2.example.com';
+$rebroadcast_node_1 = 'https://cas-client-1.example.com';
+$rebroadcast_node_2 = 'https://cas-client-2.example.com';
 
 // access to a single service
 $serviceUrl = $curbase . $curdir . 'example_service.php';
@@ -86,7 +86,7 @@ $serviceUrl2 = $curbase . $curdir . 'example_service_that_proxies.php';
 $pgtBase = preg_quote(preg_replace('/^http:/', 'https:', $curbase . $curdir), '/');
 $pgtUrlRegexp = '/^' . $pgtBase . '.*$/';
 
-$cas_url = 'http://' . $cas_host;
+$cas_url = 'https://' . $cas_host;
 if ($cas_port != '443') {
     $cas_url = $cas_url . ':' . $cas_port;
 }
