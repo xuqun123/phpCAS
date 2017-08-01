@@ -70,8 +70,8 @@ if ($auth) {
   // echo $_SERVER['HTTP_X_FORWARDED_HOST'];
   // echo $_SERVER['HTTP_X_FORWARDED_SERVER'];
   // echo $_SERVER['SERVER_NAME'];
-  echo $_SERVER['HTTP_HOST'];
-  echo $_SERVER['HTTP_PORT'];
+  // echo $_SERVER['HTTP_HOST'];
+  // echo $_SERVER['HTTP_PORT'];
   // print_r($_SERVER);
                                         ?> 
     <p>phpCAS version is <b><?php echo phpCAS::getVersion(); ?></b>.</p>
