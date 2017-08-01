@@ -3594,7 +3594,6 @@ class CAS_Client
             return $hosts[0];
         } else if (!empty($_SERVER['HTTP_HOST'])) {
             $server_url = $_SERVER['HTTP_HOST'];
-            $server_url = "https://" . $server_url;
             return $server_url;
         } 
         else if (!empty($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
