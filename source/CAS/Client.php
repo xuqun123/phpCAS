@@ -552,6 +552,26 @@ class CAS_Client
     }
 
     /**
+     * This method is used to retrieve the Specially Handled logout URL of the CAS server.
+     *
+     * @return string logout URL.
+     */
+    public function getServerUserLogoutURL()
+    {
+        $logout_base_url = 'https://' . $this->_getServerHostname();
+        if ($this->_getServerPort()!=443) {
+            $logout_base_url .= ':'
+            .$this->_getServerPort();
+        }
+
+        // the URL is build only when needed
+        if ( empty($this->_server['user_logout_url']) ) {
+            $this->_server['user_logout_url'] = $logout_base_url.'/en/user/logout';
+        }
+        return $this->_server['user_logout_url'];
+    }    
+
+    /**
      * This method sets the logout URL of the CAS server.
      *
      * @param string $url the logout URL
@@ -1685,7 +1705,8 @@ class CAS_Client
     public function logout($params)
     {
         phpCAS::traceBegin();
-        $cas_url = $this->getServerLogoutURL();
+        // $cas_url = $this->getServerLogoutURL();
+        $cas_url = $this->getServerUserLogoutURL();        
         $paramSeparator = '?';
         if (isset($params['url'])) {
             $cas_url = $cas_url . $paramSeparator . "url="
